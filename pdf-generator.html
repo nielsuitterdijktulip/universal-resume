@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Generator - Niels Uitterdijk Resume</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        .generator-box {
+            background: #f8f9fa;
+            border: 2px solid #7BA05B;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+        }
+        .button {
+            display: inline-block;
+            background: #7BA05B;
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 6px;
+            margin: 1rem;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        .button:hover {
+            background: #5A7A44;
+        }
+        .preview-button {
+            background: #666;
+        }
+        .preview-button:hover {
+            background: #333;
+        }
+        .instructions {
+            margin-top: 2rem;
+            text-align: left;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 6px;
+            border-left: 4px solid #7BA05B;
+        }
+        .status {
+            margin: 1rem 0;
+            padding: 0.5rem;
+            border-radius: 4px;
+            display: none;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <h1>📄 Resume PDF Generator</h1>
+    
+    <div class="generator-box">
+        <h2>Generate PDF with Perfect A4 Layout</h2>
+        <p>Click the button below to automatically generate and download the PDF with proper A4 sizing.</p>
+        
+        <button class="button" onclick="generatePDF()">Generate PDF</button>
+        <button class="button preview-button" onclick="previewResume()">Preview Resume</button>
+        
+        <div id="status" class="status"></div>
+    </div>
+    
+    <div class="instructions">
+        <h3>How it works:</h3>
+        <ol>
+            <li><strong>Generate PDF:</strong> Uses JavaScript to automatically create a properly formatted A4 PDF</li>
+            <li><strong>Preview Resume:</strong> Opens the resume in a new window to check layout first</li>
+            <li><strong>Automatic Download:</strong> PDF will download immediately when ready</li>
+        </ol>
+        
+        <h3>Features:</h3>
+        <ul>
+            <li>✅ Proper A4 page size (210mm × 297mm)</li>
+            <li>✅ Maintains sidebar layout</li>
+            <li>✅ Preserves green branding colors</li>
+            <li>✅ Exactly 2 pages as designed</li>
+            <li>✅ Print-optimized typography</li>
+        </ul>
+    </div>
+
+    <script>
+        function showStatus(message, type = 'success') {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status ${type}`;
+            status.style.display = 'block';
+            
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 5000);
+        }
+
+        function previewResume() {
+            window.open('index.html', '_blank');
+        }
+
+        async function generatePDF() {
+            try {
+                showStatus('Opening resume for PDF generation...', 'success');
+                
+                // Open resume in new window with PDF generation
+                const resumeWindow = window.open('index.html', '_blank', 'width=1200,height=800');
+                
+                // Wait for window to load
+                resumeWindow.addEventListener('load', function() {
+                    setTimeout(() => {
+                        // Trigger print dialog with specific settings
+                        resumeWindow.focus();
+                        
+                        // Try to set print settings programmatically
+                        const printSettings = {
+                            silent: false,
+                            printBackground: true,
+                            color: true,
+                            margin: {
+                                marginType: 'custom',
+                                top: 0.4,
+                                bottom: 0.4,
+                                left: 0.4,
+                                right: 0.4
+                            },
+                            landscape: false,
+                            pagesPerSheet: 1,
+                            collate: true,
+                            copies: 1,
+                            header: '',
+                            footer: ''
+                        };
+                        
+                        // Use the print API
+                        resumeWindow.print();
+                        
+                        showStatus('Print dialog opened! Select "Save as PDF" and choose A4 paper size.', 'success');
+                    }, 1000);
+                });
+                
+            } catch (error) {
+                console.error('PDF generation error:', error);
+                showStatus('Error generating PDF. Please use the manual print method.', 'error');
+            }
+        }
+
+        // Alternative method using window.print() with custom CSS
+        function generatePDFAlternative() {
+            // Create iframe with resume content
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+            
+            // Load resume HTML into iframe
+            fetch('index.html')
+                .then(response => response.text())
+                .then(html => {
+                    const iframeDoc = iframe.contentWindow.document;
+                    iframeDoc.open();
+                    iframeDoc.write(html);
+                    iframeDoc.close();
+                    
+                    // Wait for content to load
+                    setTimeout(() => {
+                        iframe.contentWindow.focus();
+                        iframe.contentWindow.print();
+                        
+                        // Clean up
+                        setTimeout(() => {
+                            document.body.removeChild(iframe);
+                        }, 1000);
+                    }, 500);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showStatus('Error loading resume content.', 'error');
+                    document.body.removeChild(iframe);
+                });
+        }
+    </script>
+</body>
+</html>

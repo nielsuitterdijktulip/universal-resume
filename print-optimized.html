@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niels Uitterdijk - Resume (Print Optimized)</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 5mm;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact !important;
+            color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 10pt;
+            line-height: 1.4;
+            color: #2c3e50;
+            background: white;
+        }
+        
+        .resume-container {
+            width: 200mm;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #3498db 0%, #2c3e50 90%, #34495e 100%);
+            color: white;
+            padding: 6mm 5mm;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            transform: skewX(-20deg);
+        }
+        
+        .name {
+            font-size: 18pt;
+            font-weight: 700;
+            margin-bottom: 1mm;
+            letter-spacing: -0.3pt;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        .tagline {
+            font-size: 9pt;
+            max-width: 130mm;
+            opacity: 0.95;
+            font-weight: 300;
+            line-height: 1.2;
+        }
+        
+        .photo-placeholder {
+            width: 15mm;
+            height: 15mm;
+            border: 1px solid rgba(255,255,255,0.4);
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .main-content {
+            display: flex;
+            background: white;
+        }
+        
+        .sidebar {
+            width: 65mm;
+            background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 4mm;
+            font-size: 8pt;
+            border-right: 2px solid #3498db;
+        }
+        
+        .content {
+            flex: 1;
+            padding: 4mm;
+            font-size: 9pt;
+            background: white;
+        }
+        
+        .sidebar h2 {
+            color: #2c3e50;
+            font-size: 10pt;
+            margin-bottom: 2mm;
+            border-bottom: 1pt solid #3498db;
+            padding-bottom: 1mm;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3pt;
+        }
+        
+        .content h2 {
+            color: #2c3e50;
+            font-size: 11pt;
+            margin-bottom: 2mm;
+            border-bottom: 2pt solid #3498db;
+            padding-bottom: 1mm;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3pt;
+            position: relative;
+        }
+        
+        .content h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2pt;
+            left: 0;
+            width: 15mm;
+            height: 2pt;
+            background: linear-gradient(90deg, #3498db, #2c3e50);
+        }
+        
+        .sidebar section, .content section {
+            margin-bottom: 3mm;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 0.8mm 2mm;
+            border-radius: 8pt;
+            font-size: 7pt;
+            margin: 0.5mm;
+            display: inline-block;
+            font-weight: 500;
+            box-shadow: 0 0.5pt 2pt rgba(0,0,0,0.2);
+            border: 0.5pt solid rgba(255,255,255,0.2);
+        }
+        
+        .job, .project {
+            margin-bottom: 1mm;
+            border-bottom: 0.5pt solid #ecf0f1;
+            padding-bottom: 1mm;
+            position: relative;
+        }
+        
+        .job::before, .project::before {
+            content: '';
+            position: absolute;
+            left: -3.5mm;
+            top: 2mm;
+            width: 2pt;
+            height: 80%;
+            background: linear-gradient(180deg, #3498db, #2c3e50);
+            border-radius: 1pt;
+        }
+        
+        .job h3, .project h3 {
+            font-size: 10pt;
+            margin-bottom: 0.8mm;
+            font-weight: 600;
+            color: #2c3e50;
+            letter-spacing: -0.1pt;
+        }
+        
+        .job-meta, .project-meta {
+            font-size: 7pt;
+            color: #7f8c8d;
+            font-style: italic;
+            margin-bottom: 1.5mm;
+            font-weight: 500;
+        }
+        
+        .job ul, .job p {
+            font-size: 8pt;
+            line-height: 1.3;
+            color: #34495e;
+        }
+        
+        .job ul {
+            padding-left: 3mm;
+        }
+        
+        .job li {
+            margin-bottom: 0.5mm;
+        }
+        
+        .tech-tag {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 0.6mm 1.5mm;
+            border-radius: 6pt;
+            font-size: 6pt;
+            margin: 0.4mm;
+            display: inline-block;
+            font-weight: 500;
+            box-shadow: 0 0.3pt 1pt rgba(0,0,0,0.2);
+        }
+        
+        .two-columns {
+            display: flex;
+            gap: 2mm;
+            margin-top: 1mm;
+        }
+        
+        .two-columns > div {
+            flex: 1;
+        }
+        
+        .page-break {
+            page-break-before: always;
+        }
+        
+        .contact-item, .cert-item, .lang-item, .proud-item {
+            margin-bottom: 1mm;
+            font-size: 7pt;
+            color: #34495e;
+            font-weight: 400;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 0.5mm 0;
+        }
+        
+        .proud-item {
+            display: flex;
+            align-items: center;
+            padding: 0.5mm 0;
+            border-left: 1pt solid #3498db;
+            padding-left: 1mm;
+            margin-left: 1mm;
+        }
+        
+        .cert-item {
+            position: relative;
+            padding-left: 2.5mm;
+        }
+        
+        .cert-item::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 7pt;
+        }
+        
+        /* Ensure content fits on 2 pages */
+        .main-content {
+            max-height: 240mm;
+        }
+        
+        .page-two .main-content {
+            max-height: 257mm;
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <!-- Page 1 -->
+        <div class="header">
+            <div>
+                <div class="name">Niels Uitterdijk</div>
+                <div class="tagline">Entrepreneurial cloud architect with a flair for security and a pragmatic approach to GitOps, infrastructure automation, and scalable platform engineering.</div>
+            </div>
+            <div class="photo-placeholder"></div>
+        </div>
+        
+        <div class="main-content">
+            <div class="sidebar">
+                <section>
+                    <h2>Profile</h2>
+                    <p>Cloud architect with five years of team leading experience in secure infrastructure design across FSI, healthcare, and enterprise sectors. Strong background in governance frameworks, vulnerability management, and compliance preparation with hands-on experience in security automation and cloud native technologies.</p>
+                </section>
+                
+                <section>
+                    <h2>Most Proud Of</h2>
+                    <div class="proud-item">🏆 Growing a tech startup </div>
+                    <div class="proud-item">🏆 Building an electric F1-style racecar </div>
+                    <div class="proud-item">🔒 Resolving 1,600+ vulnerabilities in 2 months while boosting security score by 12%</div>
+                    <div class="proud-item">🏆 Ran the Zurich marathon in under 4 hours</div>
+                </section>
+                
+                <section>
+                    <h2>Strengths</h2>
+                    <span class="tag">Cloud Architecture</span>
+                    <span class="tag">Security & Compliance</span>
+                    <span class="tag">Infrastructure as Code</span>
+                    <span class="tag">Vulnerability Management</span>
+                    <span class="tag">Network Design</span>
+                    <span class="tag">DevOps & Automation</span>
+                    <span class="tag">Team Leadership</span>
+                    <span class="tag">Project Management</span>
+                    <span class="tag">Problem-Solving</span>
+                    <span class="tag">Governance</span>
+                    <span class="tag">Customer Focus</span>
+                </section>
+                
+                <section>
+                    <h2>Languages</h2>
+                    <div class="lang-item"><strong>Dutch:</strong> Native</div>
+                    <div class="lang-item"><strong>English:</strong> Fluent</div>
+                    <div class="lang-item"><strong>German:</strong> B1</div>
+                </section>
+                
+                <section>
+                    <h2>Certifications</h2>
+                    <div class="cert-item">AZ-305 Azure Solutions Architect Expert</div>
+                    <div class="cert-item">AZ-104 Azure Administrator</div>
+                    <div class="cert-item">(CKA) Certified Kubernetes Administrator</div>
+                </section>
+                
+                <section>
+                    <h2>Contact</h2>
+                    <div class="contact-item">🔗 github.com/nielsuitterdijk</div>
+                    <div class="contact-item">👤 nielsuit227</div>
+                    <div class="contact-item">📍 1441 Purmerend, Netherlands</div>
+                    <div class="contact-item">✉ niels.uit@gmail.com</div>
+                    <div class="contact-item">📞 (+31) 6 23 493 546</div>
+                </section>
+            </div>
+            
+            <div class="content">
+                <section>
+                    <h2>Professional Experience</h2>
+                    
+                    <div class="job">
+                        <h3>Azure Solution Architect</h3>
+                        <div class="job-meta">Feb 2025 – ongoing | DAS Rechtsbijstand | Amsterdam</div>
+                        <ul>
+                            <li>Tech lead of infrastructure team, restructured IAM implementing Zero Trust principles and RBAC for enhanced security posture</li>
+                            <li>Redesigned network architecture eliminating IP whitelisting through secure Azure-native networking and private endpoints</li>
+                            <li>Implemented security automation and monitoring across multi-tenant environments ensuring compliance and governance</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="job">
+                        <h3>Expert Cloud Engineer</h3>
+                        <div class="job-meta">Jun 2023 – Jan 2025 | Zühlke Engineering AG | Zurich</div>
+                        <ul>
+                            <li>Led secure cloud architecture for GPT-4 landing zones, AKS migration platforms, and IIoT solutions</li>
+                            <li>Provided strategic security consulting for governance frameworks and secure cloud architecture across FSI clients</li>
+                            <li><strong>Security Leadership:</strong> Led technical security assessments for 1.5M CHF projects, designing secure architectures for IoT and AI workloads</li>
+                            <li><strong>Security Automation:</strong> Developed IaC with security-first approach using Terraform, Ansible, Bicep for automated security provisioning</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="job">
+                        <h3>Founder & CTO</h3>
+                        <div class="job-meta">Mar 2020 – Mar 2023 | Amplo AG | Zurich</div>
+                        <ul>
+                            <li>Founded a tech startup, secured 1.6M CHF funding, hired seven engineers and launching multiple products.</li>
+                            <li>Developed an event-driven predictive maintenance platform, automating 90% of the RCA tickets for various clients.</li>
+                            <li>Served over 1'000 predictive models through an inhouse developed AutoML pipeline.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="job">
+                        <h3>Cloud & ML Freelancer</h3>
+                        <div class="job-meta">Oct 2019 – Aug 2020 | Upwork | Remote</div>
+                        <p>Acquired 'Rising Talent' status, with a rating of 4.92 / 5.0</p>
+                    </div>
+                    
+                    <div class="job">
+                        <h3>Machine Learning Intern</h3>
+                        <div class="job-meta">Feb 2019 – Aug 2019 | Tritium Ltd. Pty. | Brisbane</div>
+                        <p>Analysed failure data and deployed predictive models in AWS lambda, connected with telemetry in S3 to improve successful charger rate by ±5.</p>
+                    </div>
+                    
+                    <div class="job">
+                        <h3>Powertrain Department Manager</h3>
+                        <div class="job-meta">Jul 2016 – Aug 2017 | Formula Student Team Delft | Delft</div>
+                        <p>Led department of eleven engineers to design & build the battery, motorcontrollers & motors of 4WD electric racecar. Competed in FS Hungary (2nd), FS Spain (4th) and FS Germany (12th).</p>
+                    </div>
+                    
+                    <div class="job">
+                        <h3>Teaching Assistant Advanced Dynamics</h3>
+                        <div class="job-meta">Aug 2015 – Feb 2016 | Technical University of Delft | Delft</div>
+                    </div>
+                    
+                </section>
+                
+                <div class="two-columns">
+                    <div>
+                        <section style="margin-bottom: 1mm;">
+                            <h2>Education</h2>
+                            <div class="job" style="margin-bottom: 2mm; padding-bottom: 1mm;">
+                                <h3>MSc Systems & Control</h3>
+                                <div class="job-meta">Sep 2017 – Feb 2020 | Technical University of Delft</div>
+                                <p>MSc thesis on online distributionally robust optimization for fault detection for Tritium's 5'000 public DC Fast chargers (Grade 8.5 / 10.0).</p>
+                            </div>
+                            
+                            <div class="job" style="margin-bottom: 1mm; padding-bottom: 1mm;">
+                                <h3>BSc Mechanical Engineering</h3>
+                                <div class="job-meta">Sep 2013 – Jul 2016 | Technical University of Delft</div>
+                            </div>
+                        </section>
+                    </div>
+                    
+                    <div>
+                        <section style="margin-bottom: 1mm;">
+                            <h2>Extra-curricular</h2>
+                            
+                            <div style="margin-bottom: 1mm;">
+                                <h3 style="font-size: 9pt; margin-bottom: 0.3mm; color: #2c3e50; font-weight: 600;">Board - Secretary</h3>
+                                <div style="font-size: 6pt; color: #7f8c8d;">Sep 2016–Aug 2017 | SRC Thor</div>
+                            </div>
+                            
+                            <div style="margin-bottom: 1mm;">
+                                <h3 style="font-size: 9pt; margin-bottom: 0.3mm; color: #2c3e50; font-weight: 600;">Exchange Minor</h3>
+                                <div style="font-size: 6pt; color: #7f8c8d;">Aug 2015–Feb 2016 | Lund University, Sweden</div>
+                            </div>
+                            
+                            <div>
+                                <h3 style="font-size: 9pt; margin-bottom: 0.3mm; color: #2c3e50; font-weight: 600;">BSc Honours Programme</h3>
+                                <div style="font-size: 6pt; color: #7f8c8d; margin-bottom: 0.3mm;">Sep 2014–Aug 2015 | Technical University of Delft</div>
+                                <p style="font-size: 7pt; color: #34495e; line-height: 1.2;">Elected from the top 5% students.</p>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Page 2 -->
+        <div class="page-break page-two">
+            <div class="main-content">
+                <div class="sidebar">
+                    <section>
+                        <h2>Skills</h2>                        
+                        <div style="margin-bottom: 2.5mm; padding: 1mm; background: rgba(52, 152, 219, 0.05); border-radius: 1mm; border-left: 2pt solid #3498db;">
+                            <h3 style="font-size: 8pt; margin-bottom: 0.8mm; font-weight: 600; color: #2c3e50;">Cloud Platforms</h3>
+                            <p style="font-size: 7pt; line-height: 1.3; color: #34495e;">Azure (5y), GCP (1y), AWS (3m)</p>
+                        </div>
+                        
+                        <div style="margin-bottom: 2.5mm; padding: 1mm; background: rgba(52, 152, 219, 0.05); border-radius: 1mm; border-left: 2pt solid #3498db;">
+                            <h3 style="font-size: 8pt; margin-bottom: 0.8mm; font-weight: 600; color: #2c3e50;">Infrastructure & DevOps</h3>
+                            <p style="font-size: 7pt; line-height: 1.3; color: #34495e;">Terraform, Bicep, Ansible, Azure DevOps, Gitlab, Github, Kubernetes, Docker</p>
+                        </div>
+                        <div style="margin-bottom: 2.5mm; padding: 1mm; background: rgba(52, 152, 219, 0.05); border-radius: 1mm; border-left: 2pt solid #3498db;">
+                            <h3 style="font-size: 8pt; margin-bottom: 0.8mm; font-weight: 600; color: #2c3e50;">Network & Architecture</h3>
+                            <p style="font-size: 7pt; line-height: 1.3; color: #34495e;">Hybrid Networking, Well-Architected Framework, Hub-spoke, Firewalls, VPN Gateways, Private Endpoints, NSGs</p>
+                        </div>
+                        <div
+                            style="margin-bottom: 2.5mm; padding: 1mm; background: rgba(52, 152, 219, 0.05); border-radius: 1mm; border-left: 2pt solid #3498db;">
+                            <h3 style="font-size: 8pt; margin-bottom: 0.8mm; font-weight: 600; color: #2c3e50;">Security & Compliance</h3>
+                            <p style="font-size: 7pt; line-height: 1.3; color: #34495e;">Zero Trust, RBAC, IAM, Vulnerability Management,
+                                FINMA/SOC2</p>
+                        </div>
+                        <div
+                            style="margin-bottom: 2.5mm; padding: 1mm; background: rgba(52, 152, 219, 0.05); border-radius: 1mm; border-left: 2pt solid #3498db;">
+                            <h3 style="font-size: 8pt; margin-bottom: 0.8mm; font-weight: 600; color: #2c3e50;">Security Tools</h3>
+                            <p style="font-size: 7pt; line-height: 1.3; color: #34495e;">Azure Sentinel, Microsoft Defender, Azure Policy,
+                                Security Center</p>
+                        </div>
+                        <div style="padding: 1mm; background: rgba(52, 152, 219, 0.05); border-radius: 1mm; border-left: 2pt solid #3498db;">
+                            <h3 style="font-size: 8pt; margin-bottom: 0.8mm; font-weight: 600; color: #2c3e50;">Governance & Risk</h3>
+                            <p style="font-size: 7pt; line-height: 1.3; color: #34495e;">Risk Assessment, Policy Management, Audit Preparation
+                            </p>
+                        </div>
+                    </section>
+                </div>
+                
+                <div class="content">
+                    <section>
+                        <h2>Notable Projects</h2>
+                        
+                        <div class="project">
+                            <h3>Secure AKS Migration & Zero Trust Implementation</h3>
+                            <div class="project-meta">May '24 - ongoing | 6 months | Security Lead & Tech Lead</div>
+                            <div style="margin-bottom: 1mm;">
+                                <span class="tech-tag">Zero Trust</span>
+                                <span class="tech-tag">AKS Security</span>
+                                <span class="tech-tag">Istio</span>
+                                <span class="tech-tag">RBAC</span>
+                                <span class="tech-tag">Security Scanning</span>
+                                <span class="tech-tag">Policy</span>
+                            </div>
+                            <p>Leading cloud architecture for major Swiss bank's PCF to Azure migration. Implemented Zero Trust networking, container security, and policy-based governance for 50+ applications with integrated security monitoring.</p>
+                        </div>
+                        
+                        <div class="project">
+                            <h3>FINMA Audit Support & Vulnerability Remediation</h3>
+                            <div class="project-meta">Oct '23 - Apr '24 | 7 months | Cloud Engineer</div>
+                            <div style="margin-bottom: 1mm;">
+                                <span class="tech-tag">FINMA Compliance</span>
+                                <span class="tech-tag">Sentinel</span>
+                                <span class="tech-tag">Vulnerability Mgmt</span>
+                                <span class="tech-tag">Azure Policy</span>
+                                <span class="tech-tag">Remediation</span>
+                            </div>
+                            <p>Supported Swiss health insurer's FINMA audit preparation by helping resolve 1,600+ audit findings over 2 months. Assisted with Sentinel setup and policy implementation, contributing to 12% Secure Score improvement.</p>
+                        </div>
+                        
+                        <div class="project">
+                            <h3>Secure AI Landing Zone & Data Protection</h3>
+                            <div class="project-meta">Oct '23 - Aug '24 | 10 months | Security Architect</div>
+                            <div style="margin-bottom: 1mm;">
+                                <span class="tech-tag">AI Security</span>
+                                <span class="tech-tag">Data Protection</span>
+                                <span class="tech-tag">Private Endpoints</span>
+                                <span class="tech-tag">Encryption</span>
+                                <span class="tech-tag">GDPR Compliance</span>
+                            </div>
+                            <p>Designed secure AI landing zone for global insurance firm's GPT-4 underwriting platform. Implemented data classification, end-to-end encryption, private AI endpoints, and GDPR-compliant data handling for sensitive financial data.</p>
+                        </div>
+                        
+                        <div class="project">
+                            <h3>Medical IoT Cloud Architecture</h3>
+                            <div class="project-meta">Nov '23 - Jan '24 | 3 months | Cloud Architect</div>
+                            <div style="margin-bottom: 1mm;">
+                                <span class="tech-tag">Azure IoT Hub</span>
+                                <span class="tech-tag">Azure B2C</span>
+                                <span class="tech-tag">Landing Zone</span>
+                                <span class="tech-tag">Networking</span>
+                                <span class="tech-tag">IAM</span>
+                            </div>
+                            <p>Architected cloud infrastructure for Swiss medical manufacturer's IoT data collection platform. Designed secure networking, IAM for B2B medical networks, and Azure B2C identity management with regulatory compliance considerations.</p>
+                        </div>
+                        
+                        <div class="project">
+                            <h3>Smart Maintenance Platform for Industrial Clients</h3>
+                            <div class="project-meta">Jan '21 - Jun '22 | 1.5 years | Tech Lead</div>
+                            <div style="margin-bottom: 1mm;">
+                                <span class="tech-tag">GKE</span>
+                                <span class="tech-tag">GCP Dataflow</span>
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">AutoML</span>
+                            </div>
+                            <p>Machine learning platform for predictive maintenance serving industrial clients. Enabled 1,000+ ML models for on-premises and cloud deployment, successfully predicting equipment failures for process optimization.</p>
+                        </div>
+                        
+                        <div class="project">
+                            <h3>IoT Platform for EV Chargers</h3>
+                            <div class="project-meta">Jun '22 - Apr '23 | 10 months | Tech Lead</div>
+                            <div style="margin-bottom: 1mm;">
+                                <span class="tech-tag">AKS</span>
+                                <span class="tech-tag">IoT Hub</span>
+                                <span class="tech-tag">Data Lake</span>
+                                <span class="tech-tag">Postgres</span>
+                                <span class="tech-tag">RabbitMQ</span>
+                                <span class="tech-tag">Python</span>
+                            </div>
+                            <p>Developed charger management platform to tackle EV charger reliability. Centralized documentation, configurations, live telemetry, and ML-based failure detection, accelerating root cause analysis by up to 80%.</p>
+                        </div>
+                        
+                        <div class="project">
+                            <h3>Solar Manager AG Underperformance Detection</h3>
+                            <div class="project-meta">2020 | 6 months | ML Engineer</div>
+                            <div style="margin-bottom: 1mm;">
+                                <span class="tech-tag">AWS EC2</span>
+                                <span class="tech-tag">AWS S3</span>
+                                <span class="tech-tag">Python</span>
+                            </div>
+                            <p>Solar panel degradation detection model. Developed ML system to check daily energy production against weather conditions. Detected underperformance in 2% of users, increased engagement by 15%.</p>
+                        </div>
+                        
+                        <div class="project">
+                            <h3>Saudi Aramco Processhub</h3>
+                            <div class="project-meta">2019 | 9 months | ML Engineer</div>
+                            <div style="margin-bottom: 1mm;">
+                                <span class="tech-tag">Industrial ML</span>
+                                <span class="tech-tag">Process Control</span>
+                                <span class="tech-tag">Predictive Models</span>
+                            </div>
+                            <p>Built recommendation engine using predictive models for LNG transportation compressor control. Developed ML system to support control engineers in managing critical industrial processes, reducing flaring by 9%.</p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- <script>
+        // Auto-print when page loads
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                window.print();
+            }, 500);
+        });
+    </script> -->
+</body>
+</html>

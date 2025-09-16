@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print Instructions - Niels Uitterdijk Resume</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        .instruction-box {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .step {
+            margin-bottom: 1rem;
+        }
+        .step strong {
+            color: #7BA05B;
+        }
+        code {
+            background: #e9ecef;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        .button {
+            display: inline-block;
+            background: #7BA05B;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 6px;
+            margin: 1rem 0;
+        }
+        .button:hover {
+            background: #5A7A44;
+        }
+    </style>
+</head>
+<body>
+    <h1>📄 Resume PDF Generation Instructions</h1>
+    
+    <div class="instruction-box">
+        <h2>Method 1: Browser Print (Recommended)</h2>
+        
+        <div class="step">
+            <strong>Step 1:</strong> Open the resume in your browser:<br>
+            <a href="index.html" class="button">Open Resume</a>
+        </div>
+        
+        <div class="step">
+            <strong>Step 2:</strong> Press <code>Ctrl+P</code> (Windows) or <code>Cmd+P</code> (Mac) to open print dialog
+        </div>
+        
+        <div class="step">
+            <strong>Step 3:</strong> Configure print settings:
+            <ul>
+                <li>Destination: Save as PDF</li>
+                <li>Pages: All</li>
+                <li>Layout: Portrait</li>
+                <li>Paper size: A4</li>
+                <li>Margins: Default</li>
+                <li>Options: ✅ Background graphics</li>
+            </ul>
+        </div>
+        
+        <div class="step">
+            <strong>Step 4:</strong> Click "Save" and choose filename: <code>niels-uitterdijk-resume.pdf</code>
+        </div>
+    </div>
+    
+    <div class="instruction-box">
+        <h2>Method 2: Browser Developer Tools (Advanced)</h2>
+        
+        <div class="step">
+            <strong>Step 1:</strong> Open resume and press <code>F12</code> to open Developer Tools
+        </div>
+        
+        <div class="step">
+            <strong>Step 2:</strong> Press <code>Ctrl+Shift+P</code> to open command palette
+        </div>
+        
+        <div class="step">
+            <strong>Step 3:</strong> Type "print" and select "Rendering > Emulate CSS media type > print"
+        </div>
+        
+        <div class="step">
+            <strong>Step 4:</strong> This shows exactly how the PDF will look, then use <code>Ctrl+P</code> to print
+        </div>
+    </div>
+    
+    <div class="instruction-box">
+        <h2>✅ Print Settings Optimized</h2>
+        <p>The CSS has been optimized with:</p>
+        <ul>
+            <li>A4 page size with proper margins</li>
+            <li>Print-specific font sizes and spacing</li>
+            <li>Color preservation for green branding</li>
+            <li>Page break controls to avoid splitting sections</li>
+            <li>Two-page layout with proper page breaks</li>
+        </ul>
+    </div>
+    
+    <script>
+        // Add print button functionality
+        function printResume() {
+            window.open('index.html', '_blank');
+        }
+    </script>
+</body>
+</html>
